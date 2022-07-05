@@ -171,9 +171,12 @@ public class Map : MonoBehaviour
 
     private void Update()
     {
-        MoveMiddle();
-        MoveGround();
-        MoveCloud();
-
+        if ((float)EventManager.GetData("CurrentTimerValue") > 0)
+        {
+            MoveMiddle();
+            MoveGround();
+            MoveCloud();
+        }
+       
     }
 }

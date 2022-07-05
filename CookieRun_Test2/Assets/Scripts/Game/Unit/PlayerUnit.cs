@@ -55,11 +55,11 @@ public class PlayerUnit : UnitBase
     bool CheckOnTheGround()
     {
         Vector2 pos = new Vector2(capsule.bounds.center.x, capsule.bounds.center.y - capsule.bounds.extents.y);
-        RaycastHit2D raycast = Physics2D.Raycast(pos, Vector2.down, 0.05f);
+        RaycastHit2D raycast = Physics2D.Raycast(pos, Vector2.down, 0.001f);
 
         if (raycast.collider != null)   
         {
-            if (raycast.collider.tag == "Tile") //레이에 닿은게 tile player면 
+            if (raycast.collider.tag == "Tile") //레이에 닿은게 tile 
             {            
                 animator.SetBool("isAir", false);   
                 return true;
