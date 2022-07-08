@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerUnit : UnitBase
 {
     private int jumpCount = 0;
+    [SerializeField]
     private int jumpmaxCount = 2;
     private bool isJump = false;
 
@@ -49,21 +50,21 @@ public class PlayerUnit : UnitBase
                 isJump = false;
             }
         }
-
+        EatFood();
     }
 
     bool CheckOnTheGround()
     {
-        Vector2 pos = new Vector2(capsule.bounds.center.x, capsule.bounds.center.y - capsule.bounds.extents.y);
-        RaycastHit2D raycast = Physics2D.Raycast(pos, Vector2.down, 0.001f);
+        RaycastHit2D raycast = Physics2D.Raycast(
+            capsule.bounds.center,
+            Vector2.down,
+            capsule.bounds.extents.y + .02f,
+            ~(1 << LayerMask.NameToLayer("Player")));
 
         if (raycast.collider != null)   
         {
-            if (raycast.collider.tag == "Tile") //레이에 닿은게 tile 
-            {            
-                animator.SetBool("isAir", false);   
-                return true;
-            }
+            animator.SetBool("isAir", false);   
+            return true;
         }
         
         animator.SetBool("isAir", true);
@@ -71,4 +72,24 @@ public class PlayerUnit : UnitBase
         return false;
     }
 
+    void EatFood()
+    {
+        RaycastHit2D raycast = Physics2D.Raycast(
+            capsule.bounds.center,
+            Vector2.down,
+            capsule.bounds.extents.y + .02f,
+            (1 << LayerMask.NameToLayer("Item")));
+
+        if (raycast.collider != null)
+        {
+            FoodItem item = raycast.collider.gameObject.GetComponent<FoodItem>();
+
+            if (item != null)
+            {
+                hp += item.GetHP();
+
+                Destroy(raycast.collider.gameObject);
+            }
+        }
+    }
 }

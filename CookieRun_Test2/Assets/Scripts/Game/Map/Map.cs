@@ -25,6 +25,11 @@ public class Map : MonoBehaviour
     private Transform curGround;
     private Transform nextGround;
 
+    public Transform NextGround
+    {
+        get { return nextGround; }
+    }
+
     public Transform mainCam;
 
     private void Start()
@@ -171,12 +176,8 @@ public class Map : MonoBehaviour
 
     private void Update()
     {
-        if ((float)EventManager.GetData("CurrentTimerValue") > 0)
-        {
-            MoveMiddle();
-            MoveGround();
-            MoveCloud();
-        }
-       
+        MoveMiddle();
+        MoveGround();
+        MoveCloud();
     }
 }
