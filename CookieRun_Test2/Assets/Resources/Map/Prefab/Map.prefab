@@ -949,7 +949,7 @@ GameObject:
   - component: {fileID: 4916096844135776798}
   - component: {fileID: 4916096844135776799}
   - component: {fileID: 4916096844135776796}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Tile
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -1058,7 +1058,7 @@ GameObject:
   - component: {fileID: 9118128076635034721}
   - component: {fileID: 9118128076635034727}
   - component: {fileID: 9118128076635034726}
-  m_Layer: 9
+  m_Layer: 13
   m_Name: Tile
   m_TagString: Tile
   m_Icon: {fileID: 0}

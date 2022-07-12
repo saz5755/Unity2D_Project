@@ -176,6 +176,10 @@ public class Map : MonoBehaviour
 
     private void Update()
     {
+        if (GameObject.Find("GameManager").GetComponent<GameManager>().IsGameOver == true)
+        {
+            return;
+        }
         MoveMiddle();
         MoveGround();
         MoveCloud();

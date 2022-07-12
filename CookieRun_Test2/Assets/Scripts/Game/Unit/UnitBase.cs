@@ -8,4 +8,12 @@ public abstract class UnitBase : MonoBehaviour
     protected float hp;
     [SerializeField]
     protected float maxHp;
+
+    [SerializeField]
+    protected UnitType unitType = UnitType.None;
+
+    public UnitType GetUnitType()
+    {
+        return unitType;
+    }
 }

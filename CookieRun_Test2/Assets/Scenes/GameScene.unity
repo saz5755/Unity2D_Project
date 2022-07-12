@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgLayer: {fileID: 1977082332}
   unitLayer: {fileID: 1485924649}
-  um: {fileID: 0}
+  um: {fileID: 1508984737}
   mainCamera: {fileID: 519420031}
 --- !u!4 &376427833
 Transform:
@@ -813,6 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpUI: {fileID: 1681517684}
+  txtScore: {fileID: 1704833518}
 --- !u!1 &1681517682
 GameObject:
   m_ObjectHideFlags: 0
