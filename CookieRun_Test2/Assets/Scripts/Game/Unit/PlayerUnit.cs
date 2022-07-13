@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerUnit : UnitBase
 {
@@ -21,6 +22,7 @@ public class PlayerUnit : UnitBase
         rigid = GetComponent<Rigidbody2D>();
         capsule = GetComponent<CapsuleCollider2D>();
         unitType = UnitType.Player;
+
     }
 
     private void Update()
@@ -30,13 +32,19 @@ public class PlayerUnit : UnitBase
             animator.SetTrigger("SetDie");
             return;
         }
-            
 
+        Play();
+        
+        EatFood();
+    }
+
+    public void Play()
+    {
         bool isOntheGround = CheckOnTheGround();
 
         if (isOntheGround)
         {
-            isJump = true; 
+            isJump = true;
             jumpCount = jumpmaxCount;
             Debug.Log("OntheGround" + string.Format(" JumpCount {0}", jumpCount));
         }
@@ -51,18 +59,17 @@ public class PlayerUnit : UnitBase
             {
                 if (Input.GetButtonDown("Jump"))
                 {
-                    
+
                     rigid.AddForce(Vector2.up * 4, ForceMode2D.Impulse);
                     jumpCount--;
                     Debug.Log("มกวม" + jumpCount);
                 }
             }
-            else 
+            else
             {
                 isJump = false;
             }
         }
-        EatFood();
     }
 
     bool CheckOnTheGround()
@@ -88,7 +95,7 @@ public class PlayerUnit : UnitBase
         return false;
     }
 
-    void EatFood()
+    public void EatFood()
     {
         RaycastHit2D raycast = Physics2D.Raycast(
             capsule.bounds.center,

@@ -28,7 +28,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4560512506262682681}
+  m_Father: {fileID: 7152286088590872784}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1978008879301450371
@@ -55,12 +55,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4560512506262682681}
+  - component: {fileID: 7152286088590872784}
   - component: {fileID: 4560512506262682678}
   - component: {fileID: 4560512506262682676}
   - component: {fileID: 4560512506262682679}
   - component: {fileID: 4560512506262682680}
   - component: {fileID: 7680112031565544526}
+  - component: {fileID: 2944934366162614620}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -68,8 +69,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4560512506262682681
-Transform:
+--- !u!224 &7152286088590872784
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -83,6 +84,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: -0}
 --- !u!212 &4560512506262682678
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -202,8 +208,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6219d1e65cffd8e4fb322e322269d870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 1000
-  maxHp: 1000
+  hp: 0
+  maxHp: 50
   unitType: 1
   jumpmaxCount: 2
   speed: 0.04
+--- !u!222 &2944934366162614620
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4560512506262682677}
+  m_CullTransparentMesh: 1

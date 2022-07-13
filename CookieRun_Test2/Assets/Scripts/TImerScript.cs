@@ -3,42 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TImerScript : MonoBehaviour
+public class TImerScript : PlayerUnit
 {
     //[SerializeField]
-     Image timerBar;
+    Image timerBar;
 
-    public float maxTimer = 5f;
-    float timeLeft;
-    public GameObject timeUpText;
-
+    // public GameObject timeUpText;
+    PlayerUnit play;
 
     private void Awake()
     {
         EventManager.AddData("CurrentTimerValue", (p) => timerBar.fillAmount);
+        hp = maxHp;
+
     }
     private void Start()
     {
-        timeUpText.SetActive(false);
+        //timeUpText.SetActive(false);
         timerBar = GetComponent<Image>();
-        timeLeft = maxTimer;
     }
-
-  
-    
 
     private void Update()
     {
-        if(timeLeft > 0)
+        if (hp > 0)
         {
-            timeLeft -= Time.deltaTime;
-            timerBar.fillAmount = timeLeft / maxTimer;
+            hp -= Time.deltaTime;
+            timerBar.fillAmount = hp / maxHp;              
         }
         else
         {   //프로그레스바 0되면이제 팝업창 괜찮은거 띄워놓고 다시하기 할지 말지 띄우기~
 
-            timeUpText.SetActive(true);
+            //timeUpText.SetActive(true);
             Time.timeScale = 0;
         }
     }
+
+    
 }
