@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
 
     List<CoinItem> coinItems = new List<CoinItem>();
 
+
+    [SerializeField]
+    private TImerScript timerManager;
+
+
     public Camera GetMainCamera()
     {
         if (mainCamera != null)
@@ -48,6 +53,7 @@ public class GameManager : MonoBehaviour
             GameObject go = Resources.Load<GameObject>("Unit/hero/Prefab/" + playerName);
             Transform StartTransform = unitLayer.transform;
             player = Instantiate(go, StartTransform).GetComponent<PlayerUnit>();
+            player.Init(timerManager);
 
             bgLayer.transform.GetChild(0).GetComponent<Map>().groundSpeed = player.GetPlayerSpeed();
         }
@@ -142,5 +148,5 @@ public class GameManager : MonoBehaviour
 
         coinItems.Clear();
     }
-
+    
 }

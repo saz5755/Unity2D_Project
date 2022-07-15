@@ -16,6 +16,9 @@ public class PlayerUnit : UnitBase
     private Animator animator;
     private Rigidbody2D rigid;
 
+    TImerScript timer;
+    
+    
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -24,7 +27,6 @@ public class PlayerUnit : UnitBase
         unitType = UnitType.Player;
 
     }
-
     private void Update()
     {
         if (GameObject.Find("GameManager").GetComponent<GameManager>().IsGameOver == true)
@@ -36,8 +38,24 @@ public class PlayerUnit : UnitBase
         Play();
         
         EatFood();
+        HpTimer();
     }
 
+    public void HpTimer()
+    {
+        if (hp > 0)
+        {
+            hp -= Time.deltaTime;
+        }
+        else
+        {   //프로그레스바 0되면이제 팝업창 괜찮은거 띄워놓고 다시하기 할지 말지 띄우기~
+            hp = 0;
+            //timeUpText.SetActive(true);
+            Time.timeScale = 0;
+        }
+        timer.RefreshHp(Mathf.Clamp(hp / maxHp, 0f, 1f));
+
+    }
     public void Play()
     {
         bool isOntheGround = CheckOnTheGround();
@@ -94,7 +112,7 @@ public class PlayerUnit : UnitBase
 
         return false;
     }
-
+    
     public void EatFood()
     {
         RaycastHit2D raycast = Physics2D.Raycast(
@@ -117,6 +135,8 @@ public class PlayerUnit : UnitBase
 
                             if (hp > maxHp)
                                 hp = maxHp;
+
+                            timer.RefreshHp(hp/maxHp);  //이정도의 디테일은 있어야된다 << 낭만이다 
 
                             Destroy(raycast.collider.gameObject);
                             break;
@@ -152,5 +172,10 @@ public class PlayerUnit : UnitBase
     public float GetPlayerSpeed()
     {
         return speed;
+    }
+    public void Init(TImerScript timer)
+    {
+        hp = maxHp;
+        this.timer = timer;
     }
 }

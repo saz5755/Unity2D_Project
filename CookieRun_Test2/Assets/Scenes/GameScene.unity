@@ -233,6 +233,7 @@ MonoBehaviour:
   um: {fileID: 1508984737}
   IsGameOver: 0
   mainCamera: {fileID: 519420031}
+  timerManager: {fileID: 1006054451}
 --- !u!4 &376427833
 Transform:
   m_ObjectHideFlags: 0
@@ -484,11 +485,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9075c6668f20bf549ad814c0bcf15243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
-  maxHp: 50
-  unitType: 0
-  jumpmaxCount: 2
-  speed: 0.04
 --- !u!1 &1173206917
 GameObject:
   m_ObjectHideFlags: 0
