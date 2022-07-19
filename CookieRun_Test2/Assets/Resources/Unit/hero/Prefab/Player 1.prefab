@@ -46,7 +46,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.5}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 2
 --- !u!1 &4560512506262682677
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,4 +207,4 @@ MonoBehaviour:
   unitType: 1
   unitName: "\uCE58\uD0A8"
   jumpmaxCount: 3
-  speed: 0.05
+  speed: 0.03

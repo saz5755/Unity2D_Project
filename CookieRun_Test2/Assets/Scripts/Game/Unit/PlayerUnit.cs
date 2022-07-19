@@ -25,6 +25,7 @@ public class PlayerUnit : UnitBase
 
     private CapsuleCollider2D capsule;
     private Animator animator;
+    private Animator hatAnimator;
     private Rigidbody2D rigid;
 
     TImerScript timer;
@@ -32,11 +33,12 @@ public class PlayerUnit : UnitBase
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        hatAnimator = GameObject.Find("Hat").GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         capsule = GetComponent<CapsuleCollider2D>();
         unitType = UnitType.Player;
     }
-
+    
     private void Update()
     {
         if (GameData.Instance.GetGameManagerCompornent().IsGameOver == true)
@@ -45,7 +47,7 @@ public class PlayerUnit : UnitBase
             return;
         }
 
-
+        
         Play();
         EatFood();
         HpTimer();
@@ -115,11 +117,13 @@ public class PlayerUnit : UnitBase
             {
                 Debug.Log(raycast.collider.gameObject.name);
                 animator.SetBool("isAir", false);
+                hatAnimator.SetBool("isJump", false);
                 return true;
             }
         }
 
         animator.SetBool("isAir", true);
+        hatAnimator.SetBool("isJump", true);
 
         return false;
     }

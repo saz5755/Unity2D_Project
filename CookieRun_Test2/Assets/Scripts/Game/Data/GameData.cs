@@ -26,7 +26,6 @@ public class GameData : TObjSingleton<GameData>
         if (collectUnitNames.Count == 0)
         {
             collectUnitNames.Add("다이노");
-            collectUnitNames.Add("라이노");
         }
     }
 
@@ -44,9 +43,13 @@ public class GameData : TObjSingleton<GameData>
         }
     }
 
-    public Dictionary<string, GameObject> GetPlayerUnits()
+    public GameObject[] GetPlayerUnits()
     {
-        return playerUnits;
+        List<GameObject> lstUnit = new List<GameObject>();
+        
+        // 리스트를 얻어옴
+
+        return lstUnit.ToArray();
     }
 
     public GameManager GetGameManagerCompornent()

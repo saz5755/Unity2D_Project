@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     private float delay = 5f;
 
     private float timerCoin;
-    private float delayCoin = 0.05f;
+    private float delayCoin = 0.2f;
 
     // Update is called once per frame
     void Update()
@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
                 CoinItem coinItem = Instantiate(go, SpownPosition, Quaternion.identity).GetComponent<CoinItem>();
                 coinItem.groundSpeed = map.groundSpeed;
                 coinItem.ID = id;
+                
                 coinItems.Add(coinItem);
             }
         }

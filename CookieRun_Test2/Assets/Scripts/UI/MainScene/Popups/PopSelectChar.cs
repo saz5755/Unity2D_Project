@@ -13,32 +13,25 @@ public class PopSelectChar : PopBase
 
     private int currentPage = 0;
 
-    List<string> lstUintNames = new List<string>();
-    List<Image> playerUnitImages = new List<Image>();
+    List<GameObject> playerUnits = new List<GameObject>();
 
-    Image selectUnitImage;
-    GameObject selectObject;
+    PlayerUnit selectUnit;
 
     public override void OpenUI(GameObject uiManager)
     {
         parentManager = uiManager;
-        Dictionary<string, GameObject> dicUnits = GameData.Instance.GetPlayerUnits();
-
-        foreach (KeyValuePair<string, GameObject> kvp in dicUnits)
+        GameObject[] loedPlayers = Resources.LoadAll<GameObject>("Unit/hero/Prefab");
+        
+        foreach(GameObject go in loedPlayers)
         {
-            PlayerUnit unit = kvp.Value.GetComponent<PlayerUnit>();
+            PlayerUnit unit = go.GetComponent<PlayerUnit>();
             if (unit != null)
             {
                 for(int i = 0; i < GameData.Instance.collectUnitNames.Count; i++)
                 {
-                    if (GameData.Instance.collectUnitNames[i].Equals(kvp.Key))
+                    if (GameData.Instance.collectUnitNames[i].Equals(unit.name))
                     {
-                        Image unitImg = (new GameObject()).AddComponent<Image>();
-                        unitImg.sprite = kvp.Value.GetComponent<SpriteRenderer>().sprite;
-                        playerUnitImages.Add(unitImg);
-                        lstUintNames.Add(kvp.Key);
-
-                        Destroy(unitImg);
+                        playerUnits.Add(go);
                     }
                 }
             }
@@ -46,29 +39,16 @@ public class PopSelectChar : PopBase
 
         currentPage = 0;
 
-        if (selectUnitImage == null)
-        {
-            selectUnitImage = (new GameObject()).AddComponent<Image>();
-        }
-
-        if (posUnit != null)
-        {
-            selectUnitImage.sprite = playerUnitImages[currentPage].sprite;
-            selectObject = Instantiate(selectUnitImage, posUnit).gameObject;
-            selectObject.name = "UnitImage";
-        }
+        selectUnit = Instantiate(playerUnits[currentPage], posUnit).GetComponent<PlayerUnit>();
 
         RefleshUI();
     }
 
     protected override void RefleshUI()
     {
-        if (txtUnitName.text != lstUintNames[currentPage])
-        {
-            txtUnitName.text = lstUintNames[currentPage];
-            selectObject.GetComponent<Image>().sprite = playerUnitImages[currentPage].sprite;
-            selectObject.GetComponent<Image>().rectTransform.rect.Set(0f, 0f, playerUnitImages[currentPage].sprite.rect.width, playerUnitImages[currentPage].sprite.rect.height);
-        }
+        txtUnitName.text = playerUnits[currentPage].name;
+
+        
     }
 
     public void OnClickPrev()
@@ -76,19 +56,31 @@ public class PopSelectChar : PopBase
         if (currentPage > 0)
             currentPage--;
 
-        if (currentPage < 0)
-            currentPage = playerUnitImages.Count - 1;
+        if (currentPage == 0)
+            currentPage = playerUnits.Count - 1;
+
+        if (selectUnit.name != playerUnits[currentPage].GetComponent<PlayerUnit>().name)
+        {
+            Destroy(selectUnit);
+            selectUnit = Instantiate(playerUnits[currentPage], posUnit).GetComponent<PlayerUnit>();
+        }
 
         RefleshUI();
     }
 
     public void OnClickNext()
     {
-        if (currentPage < playerUnitImages.Count)
+        if (currentPage < playerUnits.Count)
             currentPage++;
 
-        if (currentPage == playerUnitImages.Count)
+        if (currentPage == playerUnits.Count)
             currentPage = 0;
+
+        if (selectUnit.name != playerUnits[currentPage].GetComponent<PlayerUnit>().name)
+        {
+            Destroy(selectUnit);
+            selectUnit = Instantiate(playerUnits[currentPage], posUnit).GetComponent<PlayerUnit>();
+        }
 
         RefleshUI();
     }
