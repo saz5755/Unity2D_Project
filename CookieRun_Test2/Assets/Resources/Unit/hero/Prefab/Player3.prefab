@@ -204,4 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 1000
   maxHp: 1000
+  unitType: 0
+  unitName: 
   jumpmaxCount: 2
+  speed: 0.04

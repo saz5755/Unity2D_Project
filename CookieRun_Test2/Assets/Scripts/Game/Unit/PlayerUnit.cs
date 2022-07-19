@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerUnit : UnitBase
 {
-    private int jumpCount = 0;
+    [SerializeField]
+    private string unitName;
+
+    public string UnitName
+    {
+        get
+        {
+            return unitName;
+        }
+    }
+    
     [SerializeField]
     private int jumpmaxCount = 2;
+    private int jumpCount = 0;
+    
     [SerializeField]
     private float speed = 0.04f;
     private bool isJump = false;
@@ -17,26 +28,25 @@ public class PlayerUnit : UnitBase
     private Rigidbody2D rigid;
 
     TImerScript timer;
-    
-    
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         capsule = GetComponent<CapsuleCollider2D>();
         unitType = UnitType.Player;
-
     }
+
     private void Update()
     {
-        if (GameObject.Find("GameManager").GetComponent<GameManager>().IsGameOver == true)
+        if (GameData.Instance.GetGameManagerCompornent().IsGameOver == true)
         {
             animator.SetTrigger("SetDie");
             return;
         }
 
+
         Play();
-        
         EatFood();
         HpTimer();
     }
@@ -56,6 +66,7 @@ public class PlayerUnit : UnitBase
         timer.RefreshHp(Mathf.Clamp(hp / maxHp, 0f, 1f));
 
     }
+
     public void Play()
     {
         bool isOntheGround = CheckOnTheGround();
@@ -112,8 +123,8 @@ public class PlayerUnit : UnitBase
 
         return false;
     }
-    
-    public void EatFood()
+
+    void EatFood()
     {
         RaycastHit2D raycast = Physics2D.Raycast(
             capsule.bounds.center,
@@ -136,8 +147,6 @@ public class PlayerUnit : UnitBase
                             if (hp > maxHp)
                                 hp = maxHp;
 
-                            timer.RefreshHp(hp/maxHp);  //이정도의 디테일은 있어야된다 << 낭만이다 
-
                             Destroy(raycast.collider.gameObject);
                             break;
                         }
@@ -155,6 +164,7 @@ public class PlayerUnit : UnitBase
                             {
                                 int curScore = int.Parse(gm.um.txtScore.text);
                                 curScore += ((CoinItem)unit).scorePoint;
+                                GameData.Instance.playerScore = curScore;
                                 gm.um.txtScore.text = curScore.ToString();
                             }
 
@@ -173,6 +183,7 @@ public class PlayerUnit : UnitBase
     {
         return speed;
     }
+
     public void Init(TImerScript timer)
     {
         hp = maxHp;

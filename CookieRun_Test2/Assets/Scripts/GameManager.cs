@@ -20,10 +20,8 @@ public class GameManager : MonoBehaviour
 
     List<CoinItem> coinItems = new List<CoinItem>();
 
-
     [SerializeField]
     private TImerScript timerManager;
-
 
     public Camera GetMainCamera()
     {
@@ -61,7 +59,7 @@ public class GameManager : MonoBehaviour
 
         if (um != null)
         {
-            um.txtScore.text = "0";
+            um.txtScore.text = GameData.Instance.playerScore.ToString();
         }
     }
 
@@ -91,7 +89,7 @@ public class GameManager : MonoBehaviour
 
             Vector3 SpownPosition = mainCamera.transform.position;
 
-            SpownPosition = new Vector3(8f, map.transform.position.y + Random.Range(0f, 1f), 1f);
+            SpownPosition = new Vector3(8f, map.transform.position.y + Random.Range(0f, 2f), 1f);
 
             int id = foodItems.Count;
             FoodItem foodItem = Instantiate(go, SpownPosition, Quaternion.identity).GetComponent<FoodItem>();
@@ -148,5 +146,5 @@ public class GameManager : MonoBehaviour
 
         coinItems.Clear();
     }
-    
+
 }

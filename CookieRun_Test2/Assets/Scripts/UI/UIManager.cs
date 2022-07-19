@@ -10,18 +10,13 @@ public class UIManager : MonoBehaviour
     public UIProgress hpUI;
 
     public Text txtScore;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (gm.IsGameOver == true)
+        if (gm.IsGameOver == true)
         {
             return;
-        }*/
+        }
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class UnitBase : MonoBehaviour
 {
     [SerializeField]
-    public float hp = 0f;
+    protected float hp;
     [SerializeField]
-    public float maxHp = 20f;   
+    protected float maxHp;
 
     [SerializeField]
     protected UnitType unitType = UnitType.None;
@@ -16,5 +16,4 @@ public abstract class UnitBase : MonoBehaviour
     {
         return unitType;
     }
-
 }

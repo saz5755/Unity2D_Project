@@ -50,6 +50,7 @@ public class FoodItem : UnitBase
         if (Camera.main.WorldToScreenPoint(transform.position).x < 0)
             Destroy(gameObject);
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Magnet"))
@@ -58,4 +59,5 @@ public class FoodItem : UnitBase
             target = collision.transform.parent.gameObject;
         }
     }
+
 }
